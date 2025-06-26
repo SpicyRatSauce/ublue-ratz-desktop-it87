@@ -6,8 +6,8 @@ name: ublue-ratz-desktop-it87
 description: This is my personal OS image.
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/silverblue-main
-image-version: 41 # latest is also supported if you want new updates ASAP
+base-image: ghcr.io/ublue-os/kinoite-main
+image-version: latest # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
 # you can include multiple instances of the same module
@@ -17,27 +17,98 @@ modules:
       - source: system
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
+# Enable non free repo
+  - type: dnf
+    repos:
+      nonfree: negativo17
+
+ - type: script
+   scripts:
+    - install-it87.sh
+
   - type: rpm-ostree
     repos:
-      - https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-%OS_VERSION%/atim-starship-fedora-%OS_VERSION%.repo
+      - https://copr.fedorainfracloud.org/coprs/codifryed/CoolerControl/repo/fedora-%OS_VERSION%/codifryed-CoolerControl-fedora-%OS_VERSION%.repo
     install:
-      - micro
-      - starship
+      - coolercontrol
+      - tailscale
+      - winesync
+      - steam-devices
+      - distrobox
+      - plasma-discover-rpm-ostree
+      - lm_sensors
+      # Virtualization
+      - dnsmasq
+      - virt-manager
+      - libvirt-daemon-config-network
+      - libvirt-daemon-kvm
+      - qemu-kvm
+      - virt-viewer
     remove:
       # example: removing firefox (in favor of the flatpak)
       # "firefox" is the main package, "firefox-langpacks" is a dependency
       - firefox
       - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
 
+  - type: kargs
+    arch: x86_64
+    kargs:
+      - acpi_enforce_resources=lax
+
+  - type: systemd
+    system:
+      enabled:
+        - tailscaled.service
+        - podman.service
+        - coolercontrold.service
+
   - type: default-flatpaks
     notify: true # Send notification after install/uninstall is finished (true/false)
     system:
       # If no repo information is specified, Flathub will be used by default
       install:
-        - org.mozilla.firefox
-        - org.gnome.Loupe
-      remove:
-        - org.gnome.eog
+      # Basic Utilites
+        - net.waterfox.waterfox
+        - com.github.tchx84.Flatseal
+        - org.fkoehler.KTailctl
+        - io.missioncenter.MissionCenter
+        - it.mijorus.gearlever
+        - com.usebottles.bottles
+        - io.github.dvlv.boxbuddyrs
+        - com.github.zocker_160.SyncThingy
+        - org.videolan.VLC
+        - org.gnome.World.PikaBackup
+        # KDE Apps
+        - org.kde.kphotoalbum
+        - org.kde.gwenview
+        - org.kde.kate
+        - org.kde.okular
+        - org.kde.kcalc
+        - org.kde.krdc
+        - org.kde.skanpage
+        - org.kde.kamoso
+        - org.kde.marknote
+        # Misc Tools
+        - com.discordapp.Discord
+        - org.localsend.localsend_app
+        - com.transmissionbt.Transmission
+        - com.dec05eba.gpu_screen_recorder
+        # Office
+        - com.github.jeromerobert.pdfarranger
+        - org.onlyoffice.desktopeditors
+        # Creative
+        - org.kde.krita
+        - com.ultimaker.cura
+        - org.kde.kdenlive
+        # Gaming
+        - org.prismlauncher.PrismLauncher
+        - com.github.Matoking.protontricks
+        - com.valvesoftware.Steam
+        - com.heroicgameslauncher.hgl
+        - org.vinegarhq.Sober
+        - io.github.limo_app.limo
+#      remove:
+#       - org.gnome.eog
     user: {} # Also add Flathub user repo, but no user packages
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
