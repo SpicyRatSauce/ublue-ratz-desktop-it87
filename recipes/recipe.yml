@@ -31,6 +31,7 @@ modules:
       - git
       - make
       - kernel-devel
+      - linux-headers
       # Other system apps
       - coolercontrol
       - tailscale
