@@ -30,8 +30,9 @@ echo "--- Building and installing IT87 driver via DKMS ---"
       # --- IMPORTANT: Kernel header symlink logic ---
       # This block must run *before* dkms add/install
       # It ensures 'uname -r' captures the correct kernel version at runtime
-      # and the symlink is created just before DKMS operations,
-      # which resolves the "cannot find kernel headers" error.
+      # and the symlink is created just before DKMS operations.
+      # While we are explicitly using --kernelsourcedir below,
+      # keeping this symlink might still be beneficial for other tools or for robustness.
       KERNEL_VERSION=$(uname -r)
       echo "Current kernel version reported by uname -r: $KERNEL_VERSION"
 
@@ -49,11 +50,12 @@ echo "--- Building and installing IT87 driver via DKMS ---"
 
       # --- End of kernel header symlink logic ---
 
-      echo "Adding IT87 driver to DKMS tree..."
-      sudo dkms add it87/1.0
+      # --- CRITICAL CHANGE: Explicitly tell DKMS where the kernel source is ---
+      echo "Adding IT87 driver to DKMS tree with explicit kernel source directory..."
+      sudo dkms add it87/1.0 --kernelsourcedir="/usr/src/kernels/$KERNEL_VERSION"
 
-      echo "Building and installing IT87 driver via DKMS..."
-      sudo dkms install it87/1.0
+      echo "Building and installing IT87 driver via DKMS with explicit kernel source directory..."
+      sudo dkms install it87/1.0 --kernelsourcedir="/usr/src/kernels/$KERNEL_VERSION"
 
       echo "--- Configuring IT87 module options and autoload ---"
 
