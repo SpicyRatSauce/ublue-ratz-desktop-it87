@@ -26,6 +26,12 @@ modules:
     repos:
       - https://copr.fedorainfracloud.org/coprs/codifryed/CoolerControl/repo/fedora-%OS_VERSION%/codifryed-CoolerControl-fedora-%OS_VERSION%.repo
     install:
+    # it87 build dep
+      - dkms
+      - git
+      - make
+      - kernel-devel
+      # Other system apps
       - coolercontrol
       - tailscale
       - winesync
