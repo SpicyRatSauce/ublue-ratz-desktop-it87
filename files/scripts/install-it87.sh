@@ -43,23 +43,3 @@ sudo ln -sf "/usr/src/kernels/$KERNEL_VERSION" "/lib/modules/$KERNEL_VERSION/bui
 echo "Symlink created: /lib/modules/$KERNEL_VERSION/build -> /usr/src/kernels/$KERNEL_VERSION"
 
 # --- End of kernel header symlink logic -
-
-echo "Building and installing IT87 driver via DKMS..."
-sudo dkms install it87/1.0
-
-echo "--- Configuring IT87 module options and autoload ---"
-
-# Add kernel module options for ignore_resource_conflict and force_id.
-# These will be applied when the module loads at boot.
-echo "options it87 ignore_resource_conflict=true force_id=0x8628" | sudo tee /etc/modprobe.d/it87.conf
-
-# Ensure the it87 module is loaded automatically at boot.
-echo "it87" | sudo tee /etc/modules-load.d/it87.conf
-
-# The following modprobe is only for testing during the build.
-# On a live system, the /etc/modprobe.d and /etc/modules-load.d
-# files will handle automatic loading with parameters.
-echo "Loading it87 module with force_id=0x8628 for build-time verification..."
-sudo modprobe it87 force_id=0x8628
-
-echo "--- IT87 driver installation and configuration complete ---"
