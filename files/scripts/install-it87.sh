@@ -5,8 +5,10 @@
 # builds actually ran successfully without any errors!
 set -oue pipefail
 
+echo "--- Building and installing IT87 driver via DKMS ---"
+
 echo "Adding IT87 driver to DKMS tree..."
-sudo dkms add it87/1.0echo "--- Building and installing IT87 driver via DKMS ---"
+sudo dkms add it87/1.0
 
 IT87_DKMS_SRC_DIR="/usr/src/it87-1.0"
 
