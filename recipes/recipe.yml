@@ -22,10 +22,6 @@ modules:
     repos:
       nonfree: negativo17
 
- - type: script
-   scripts:
-    - install-it87.sh
-
   - type: rpm-ostree
     repos:
       - https://copr.fedorainfracloud.org/coprs/codifryed/CoolerControl/repo/fedora-%OS_VERSION%/codifryed-CoolerControl-fedora-%OS_VERSION%.repo
@@ -61,6 +57,10 @@ modules:
         - tailscaled.service
         - podman.service
         - coolercontrold.service
+
+  - type: script
+    scripts:
+      - install-it87.sh
 
   - type: default-flatpaks
     notify: true # Send notification after install/uninstall is finished (true/false)
