@@ -30,7 +30,6 @@ modules:
       - dkms
       - git
       - make
-      - kernel-headers
       - kernel-devel
       - gcc
       # Other system apps
