@@ -12,6 +12,23 @@ image-version: 42 # latest is also supported if you want new updates ASAP
 # module configuration, executed in order
 # you can include multiple instances of the same module
 modules:
+
+- type: script
+    scripts:
+      - |
+        echo "--- Debugging Kernel Info ---"
+        echo "Current kernel (uname -r):"
+        uname -r
+        echo "Kernel version (uname -v):"
+        uname -v
+        echo "OS release info (cat /etc/os-release):"
+        cat /etc/os-release
+        echo "Content of /lib/modules/:"
+        ls -l /lib/modules/
+        echo "Installed kernel packages (rpm -qa 'kernel*' | sort):" # Use rpm -qa for immutable systems
+        rpm -qa 'kernel*' | sort
+        echo "--- End Debugging Kernel Info ---"
+        
   - type: files
     files:
       - source: system
