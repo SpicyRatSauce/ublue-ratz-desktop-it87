@@ -68,8 +68,8 @@ modules:
 
   - type: script
     scripts:
-      - install-it87.sh  # Run script to install it87 driver for fan header control on gigabyte a520 s2m (might work on others)
-
+#      - install-it87.sh  # Run script to install it87 driver for fan header control on gigabyte a520 s2m (might work on others)
+      - kernel-info.sh
   - type: default-flatpaks
     notify: true # Send notification after install/uninstall is finished (true/false)
     system:
