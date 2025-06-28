@@ -64,7 +64,7 @@ modules:
       enabled:
         - tailscaled.service
         - podman.service
-        - coolercontrold.service
+      #  - coolercontrold.service
 
   - type: script
     scripts:
