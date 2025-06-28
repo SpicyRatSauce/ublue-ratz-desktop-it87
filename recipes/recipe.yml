@@ -34,7 +34,7 @@ modules:
       - gcc
       - kernel-headers
       # Other system apps
-    #  - coolercontrol
+      - coolercontrol
       - tailscale
       - winesync
       - steam-devices
