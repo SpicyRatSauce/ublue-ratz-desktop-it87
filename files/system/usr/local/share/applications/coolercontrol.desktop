@@ -1,0 +1,12 @@
+# files/usr/local/share/applications/coolercontrol.desktop
+
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=CoolerControl GUI
+Comment=Control your cooling devices
+Exec=/usr/local/bin/coolercontrol-gui %U # %U is for opening files with the app, though less relevant here
+Icon=org.coolercontrol.CoolerControl # You might need to provide an icon file or use a generic one
+Terminal=false
+Categories=System;Utility;
+StartupNotify=true
