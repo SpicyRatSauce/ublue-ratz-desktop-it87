@@ -48,6 +48,11 @@ modules:
       - libvirt-daemon-kvm
       - qemu-kvm
       - virt-viewer
+      # qt6-6.9 for coolercontrol
+      - qt6-qtbase # This is the core, which needs to upgrade from 6.8 to 6.9
+      - qt6-qtcore
+      - qt6-qtdbus
+      - qt6-qtnetwork
     remove:
       # example: removing firefox (in favor of the flatpak)
       # "firefox" is the main package, "firefox-langpacks" is a dependency
