@@ -7,7 +7,7 @@ description: This is my personal OS image.
 
 # the base image to build on top of (FROM) and the version tag to use
 base-image: ghcr.io/ublue-os/kinoite-main
-image-version: 42 # latest is also supported if you want new updates ASAP
+image-version: latest # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
 # you can include multiple instances of the same module
@@ -50,9 +50,6 @@ modules:
       - virt-viewer
       # qt6-6.9 for coolercontrol
       - qt6-qtbase # This is the core, which needs to upgrade from 6.8 to 6.9
-      - qt6-qtcore
-      - qt6-qtdbus
-      - qt6-qtnetwork
     remove:
       # example: removing firefox (in favor of the flatpak)
       # "firefox" is the main package, "firefox-langpacks" is a dependency
