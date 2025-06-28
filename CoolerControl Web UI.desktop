@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Exec=xdg-open http://localhost:11987
+Name=CoolerControl Web UI
+Comment=Open CoolerControl Web Interface
+Icon=web
