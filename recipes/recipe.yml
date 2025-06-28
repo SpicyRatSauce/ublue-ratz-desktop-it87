@@ -42,12 +42,12 @@ modules:
       - plasma-discover-rpm-ostree
       - lm_sensors
       # Virtualization
-      - dnsmasq
-      - virt-manager
-      - libvirt-daemon-config-network
-      - libvirt-daemon-kvm
-      - qemu-kvm
-      - virt-viewer
+#      - dnsmasq
+#      - virt-manager
+#      - libvirt-daemon-config-network
+#      - libvirt-daemon-kvm
+#      - qemu-kvm
+#      - virt-viewer
     remove:
       # example: removing firefox (in favor of the flatpak)
       # "firefox" is the main package, "firefox-langpacks" is a dependency
