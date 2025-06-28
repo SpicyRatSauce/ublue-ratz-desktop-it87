@@ -33,3 +33,5 @@ StandardError=journal
 ```
 
 6. Enable service `sudo systemctl enable --now coolercontrold.service`.
+
+7. Download `CoolerControl Web UI.desktop` from this github and put it on the desktop. Or visit `http://localhost:11987` for WebUI without shortcut.
