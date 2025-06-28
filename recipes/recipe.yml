@@ -14,9 +14,12 @@ image-version: latest # latest is also supported if you want new updates ASAP
 modules:  
   - type: files
     files:
-      - source: system
-        destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
-
+     # - source: system
+     #   destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
+      - source: config/files/system/usr/local/bin
+        destination: /usr/local/bin
+      - source: config/files/system/etc/systemd/system
+        destination: /etc/systemd/system
 # Enable non free repo
 #  - type: dnf
 #    repos:
